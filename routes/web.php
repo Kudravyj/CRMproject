@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/mapbox', function () {
-    return view('mapbox');
-});
+Route::get('/mapbox', 'App\Http\Controllers\map\MapBoxController@index');
+Route::get('/create','App\Http\Controllers\OrderController@createView');
+Route::post('/create', 'App\Http\Controllers\OrderController@create');
+Route::get('/', 'App\Http\Controllers\HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\Authenticatable as Authenticat;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Authenticat
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,6 +18,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guarded = [];
+
     protected $fillable = [
         'name',
         'email',
@@ -41,4 +44,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

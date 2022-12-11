@@ -18,6 +18,8 @@ class User extends Authenticatable implements Authenticat
      *
      * @var array<int, string>
      */
+    protected $guarded = [];
+
     protected $fillable = [
         'name',
         'email',
@@ -44,7 +46,8 @@ class User extends Authenticatable implements Authenticat
     ];
 
 
-    function create($data){
-
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

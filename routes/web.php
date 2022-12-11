@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/mapbox', 'App\Http\Controllers\map\MapBoxController@index');
-Route::get('/create','App\Http\Controllers\OrderController@view');
+Route::get('/create','App\Http\Controllers\OrderController@createView');
 Route::post('/create', 'App\Http\Controllers\OrderController@create');
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 

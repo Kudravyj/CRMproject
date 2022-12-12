@@ -12,7 +12,33 @@
                 <ul class="list-group mb-3">
                     <span>THER IS MAP</span>
                     <input type="text" class="form-control" id="getAddress" placeholder="sam">
+                    <select class="form-select"  id="jsSuggestion" name="city" required>
+                        <option value="">Choose...</option>
+                    </select>
                 </ul>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="lat" name="postalCode" value="333" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="lng" name="postalCode" value="" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Billing address</h4>
@@ -98,10 +124,15 @@
         method: 'GET'});
 
     getAddress.addEventListener('change', () => {
-            response.then(response => response.json())
-            .then(text => console.log(text))
+        response.then(response => response.json())
+            .then(text => createBlock(text.features[0]))
     });
-
+    function createBlock(text){
+        document.getElementById("address").value = text.place_name;
+        document.getElementById("lat").value = text.geometry.coordinates[0];
+        document.getElementById("lng").value = text.geometry.coordinates[1];
+        console.log(text);
+    }
 </script>
 
 @endsection
